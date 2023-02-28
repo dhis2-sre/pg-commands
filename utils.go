@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"os/exec"
 )
 
@@ -14,6 +15,25 @@ type ExecOptions struct {
 }
 
 func streamExecOutput(out io.ReadCloser, options ExecOptions) (string, error) {
+	output := ""
+	reader := bufio.NewReader(out)
+	line, err := reader.ReadString('\n')
+	log.Println("line")
+	log.Println(line)
+	output += line
+	for err == nil {
+		if options.StreamPrint {
+			//nolint: staticcheck
+			fmt.Printf(line)
+		}
+		line, err = reader.ReadString('\n')
+		output += line
+	}
+
+	return output, nil
+}
+
+func streamExecOutput2(out io.ReadCloser, options ExecOptions) (string, error) {
 	output := ""
 	reader := bufio.NewReader(out)
 	for {

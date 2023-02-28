@@ -5,6 +5,12 @@ services:
     environment:
       POSTGRES_USER: example
       POSTGRES_PASSWORD: example
-      POSTGRES_DB: postgres
+      POSTGRES_DB: example
     ports:
       - "5432:5432"
+
+  dump:
+    image: alpine
+    command: /bin/sh -c 'apk --no-cache -U upgrade && apk add --no-cache postgresql-client && /app/pg_dump_restore'
+    volumes:
+      - ./pg_dump_restore:/app/pg_dump_restore

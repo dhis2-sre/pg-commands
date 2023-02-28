@@ -69,3 +69,20 @@ Dump success
 Restore success
 
 ```
+
+# Bugs?
+* output not tar.gz
+* output 0 size file in case of failure
+* separate result and error
+
+```sh
+cd examples/
+go build -o pg_dump_restore .
+docker compose up example -d
+psql -h localhost -d example -U example
+# create table snot(mid int);
+# insert into snot(mid) values(1);
+# insert into snot(mid) values(2);
+# insert into snot(mid) values(3);
+docker compose run dump
+```

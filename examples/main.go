@@ -9,9 +9,9 @@ import (
 
 func main() {
 	dump, err := pg.NewDump(&pg.Postgres{
-		Host:     "localhost",
+		Host:     "example",
 		Port:     5432,
-		DB:       "dev_example",
+		DB:       "example",
 		Username: "example",
 		Password: "example",
 	})
@@ -35,9 +35,9 @@ func main() {
 	}
 
 	restore, err := pg.NewRestore(&pg.Postgres{
-		Host:     "localhost",
+		Host:     "example",
 		Port:     5432,
-		DB:       "dev_example",
+		DB:       "example",
 		Username: "example",
 		Password: "example",
 	})
